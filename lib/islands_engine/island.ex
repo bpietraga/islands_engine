@@ -17,6 +17,9 @@ defmodule IslandsEngine.Island do
     end
   end
 
+  def overlaps?(existing_island, new_island), do:
+    not MapSet.disjoint?(existing_island.coordinates, new_island.coordinates)
+
   defp add_coordinates(offsets, upper_left) do
     Enum.reduce_while(offsets, MapSet.new, fn offset, acc ->
       add_coordinate(acc, upper_left, offset)
