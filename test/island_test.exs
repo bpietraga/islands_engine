@@ -4,7 +4,7 @@ defmodule IslandsEngine.IslandTest do
 
   test "valid coordinate" do
     expected = Coordinate.new(4, 6)
-    assert expected  ==
+    assert expected ==
     {:ok, %IslandsEngine.Coordinate{col: 6, row: 4}}
   end
 
