@@ -52,4 +52,29 @@ defmodule IslandsEngine.IslandTest do
     assert false == Island.overlaps?(square, l_shape)
     assert false == Island.overlaps?(dot, l_shape)
   end
+
+  test "miss guess" do
+    expected = :miss
+    {:ok, dot_coordinate} = Coordinate.new(4, 4)
+    {:ok, dot} = Island.new(:dot, dot_coordinate)
+    {:ok, coordinate} = Coordinate.new(2, 2)
+    assert expected == Island.guess(dot, coordinate)
+  end
+
+  test "hit guess and forested" do
+    expected = %IslandsEngine.Island{
+      coordinates: MapSet.new(
+        [%IslandsEngine.Coordinate{col: 4, row: 4}]
+      ),
+      hit_coordinates: MapSet.new(
+        [%IslandsEngine.Coordinate{col: 4, row: 4}]
+      )
+    }
+    {:ok, dot_coordinate} = Coordinate.new(4, 4)
+    {:ok, dot} = Island.new(:dot, dot_coordinate)
+    {:ok, new_coordinate} = Coordinate.new(4, 4)
+    {:hit, dot} = Island.guess(dot, new_coordinate)
+    assert expected == dot
+    assert true == Island.forested?(dot)
+  end
 end
