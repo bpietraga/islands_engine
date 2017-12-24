@@ -56,7 +56,7 @@ defmodule IslandsEngine.Board do
 
   def win_check(board) do
     case all_forested?(board) do
-      true  -> :win_check
+      true  -> :win
       false -> :no_win
     end
   end
