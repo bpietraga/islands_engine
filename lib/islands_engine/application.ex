@@ -10,7 +10,8 @@ defmodule IslandsEngine.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      {Registry, keys: :unique, name: Registry.Game}
+      {Registry, keys: :unique, name: Registry.Game},
+      IslandsEngine.GameSupervisor
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
