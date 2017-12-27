@@ -8,10 +8,13 @@ defmodule IslandsEngine.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    # Create named table for storing game state
+    :ets.new(:game_state, [:public, :named_table])
+
     # Define workers and child supervisors to be supervised
     children = [
-      # Starts a worker by calling: IslandsEngine.Worker.start_link(arg1, arg2, arg3)
-      # worker(IslandsEngine.Worker, [arg1, arg2, arg3]),
+      {Registry, keys: :unique, name: Registry.Game},
+      IslandsEngine.GameSupervisor
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
