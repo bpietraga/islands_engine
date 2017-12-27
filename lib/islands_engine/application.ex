@@ -8,6 +8,9 @@ defmodule IslandsEngine.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    # Create named table for storing game state
+    :ets.new(:game_state, [:public, :named_table])
+
     # Define workers and child supervisors to be supervised
     children = [
       {Registry, keys: :unique, name: Registry.Game},
